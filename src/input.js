@@ -195,6 +195,11 @@ class MutationHandler {
 		const freshDomConverter = new DomConverter();
 		const modelFromCurrentDom = this.editor.data.toModel( freshDomConverter.domToView( domMutationCommonAncestor ) ).getChild( 0 );
 
+		// On android deleting all contents of a note leads this handler
+		// hot fix - do nothing
+		if ( !modelFromCurrentDom ) {
+			return;
+		}
 		// Current model.
 		const currentModel = this.editor.editing.mapper.toModelElement( mutationsCommonAncestor );
 
